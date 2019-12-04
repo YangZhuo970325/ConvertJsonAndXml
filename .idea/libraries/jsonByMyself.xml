@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="jsonByMyself">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/jar/jsonByMyself.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
