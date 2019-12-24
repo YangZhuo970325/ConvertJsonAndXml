@@ -19,9 +19,9 @@ import static com.hand.ConvertXmlAndJsonUtil.strToDocument;
  */
 public class ConvertXmlToJsonTest {
     public static void main(String[] args) throws Exception {
-        String s = FileUtil.readFile("C:\\Users\\92074\\Desktop\\test01.xml");
+        String s = FileUtil.readFile("C:\\Users\\92074\\Desktop\\xmlAndjson\\test01.xml");
         Document document = strToDocument(s);
         String jsonString = documentToJSONObject(document).toJSONString();
-        FileUtil.writeFile(jsonString, "C:\\Users\\92074\\Desktop\\test02.txt");
+        FileUtil.writeFile(jsonString, "C:\\Users\\92074\\Desktop\\xmlAndjson\\test02.txt");
     }
 }

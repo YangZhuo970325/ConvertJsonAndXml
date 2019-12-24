@@ -66,7 +66,6 @@ public class ConvertXmlAndJsonUtil {
       **/
     public static Document strToDocument(String xml){
         try {
-            //加上xml标签是为了获取最外层的标签，如果不需要可以去掉
             return DocumentHelper.parseText(xml);
         } catch (DocumentException e) {
             return null;
@@ -102,17 +101,19 @@ public class ConvertXmlAndJsonUtil {
         if (!listElement.isEmpty()) {
             for (Element e : listElement) {// 遍历所有一级子节点
                 //if (e.attributes().isEmpty() && e.elements().isEmpty())
-                if (e.elements().isEmpty()) // 判断一级节点是否有属性和子节点
+                if (e.elements().isEmpty()) // 判断一级节点是否有子节点
                     result.put(e.getName(), e.getTextTrim());// 沒有则将当前节点作为上级节点的属性对待
                 else {
                     if (!result.containsKey(e.getName())) // 判断父节点是否存在该一级节点名称的属性
                         result.put(e.getName(), new JSONArray());// 没有则创建
-                    ((JSONArray) result.get(e.getName())).add(elementToJSONObject(e));// 将该一级节点放入该节点名称的属性对应的值中
+                    if(listElement.size() == 1) {  //判断子节点是一个list还是一个object
+                        result.put(e.getName(),elementToJSONObject(e));// 如果是一个object,将该一级节点放入该节点名称的属性对应的值中
+                    } else {
+                        ((JSONArray) result.get(e.getName())).add(elementToJSONObject(e));// 如果是一个list,将该一级节点放入该节点名称的属性对应的值中
+                    }
                 }
             }
         }
-
-
         return result;
     }
 }

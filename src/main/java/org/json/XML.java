@@ -225,8 +225,8 @@ public class XML {
         int var8;
         String var9;
         Object var10;
-        if (!(var0 instanceof JSONObject)) {
-            if (var0 instanceof JSONArray) {
+        if (!(var0 instanceof JSONObject)) {    //判断是否为jsonObject
+            if (var0 instanceof JSONArray) {    //判断是否时jsonArray
                 var4 = (JSONArray)var0;
                 var8 = var4.length();
 
