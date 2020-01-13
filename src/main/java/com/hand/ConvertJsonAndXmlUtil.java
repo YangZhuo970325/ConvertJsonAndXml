@@ -4,14 +4,12 @@
  **/
 package com.hand;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
+import com.hand.json.JSONArray;
+import com.hand.json.JSONException;
+import com.hand.json.JSONObject;
 import com.hand.util.FileUtil;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.*;
-import java.nio.charset.Charset;
+import java.io.IOException;
 
 /**
  * json转xml工具类
@@ -85,19 +83,17 @@ public class ConvertJsonAndXmlUtil {
             Object object = com.alibaba.fastjson.JSONObject.parse(json);
             Object obj = null;
             if(object instanceof com.alibaba.fastjson.JSONArray){
-                System.out.println("jsonarray");
-                org.json.JSONArray jsonArray = new org.json.JSONArray(json);
+                JSONArray jsonArray = new JSONArray(json);
                 obj = jsonArray;
             }else if(object instanceof com.alibaba.fastjson.JSONObject){
-                System.out.println("jsonobject");
-                org.json.JSONObject jsonObject = new org.json.JSONObject(json);
+                JSONObject jsonObject = new JSONObject(json);
                 obj = jsonObject;
             }else{
-                System.out.println("wrong");
+                System.out.println("Not JsonArray And JsonObject");
             }
             String xml = "<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>\n<"+ elementNode
                     + ":" +rootNode + " " + namespace + ">"
-                    + org.json.XML.toString(obj, elementNode)
+                    + com.hand.json.XML.toString(obj, elementNode)
                     + "</" + elementNode + ":" +rootNode+">";
             return xml;
 

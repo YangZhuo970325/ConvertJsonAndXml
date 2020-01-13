@@ -2,7 +2,7 @@
  * 文件名：XML.java
  * 描述：
  **/
-package org.json;
+package com.hand.json;
 
 import java.util.Iterator;
 /**
