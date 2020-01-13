@@ -4,8 +4,8 @@
  **/
 package com.example.demo;
 
+import com.hand.json.JSONException;
 import com.hand.util.FileUtil;
-import org.json.JSONException;
 
 import java.io.IOException;
 
@@ -20,8 +20,8 @@ import static com.hand.ConvertJsonAndXmlUtil.convert;
  */
 public class ConvertJsonToXmlTest {
     public static void main(String[] args) throws IOException, JSONException {
-        String json = FileUtil.readFile("C:\\Users\\92074\\Desktop\\test02.txt");
-        String xml = convert(json, "qwer", "n01","xmlns:n01=\"http://soa.cmcc.com/JMS_BP_SOA_HQ_DistEipUserSrv\"", "unicode");
-        FileUtil.writeFile(xml, "C:\\Users\\92074\\Desktop\\test03.xml");
+        String json = FileUtil.readFile("C:\\Users\\92074\\Desktop\\xmlAndjson\\test02.txt");
+        String xml = convert(json, "qwer", "n01","xmlns:n01=\"http://esb.iyu.com\"", "utf-8");
+        FileUtil.writeFile(xml, "C:\\Users\\92074\\Desktop\\xmlAndjson\\test03.xml");
     }
 }

@@ -4,12 +4,12 @@
  **/
 package com.hand;
 
+import com.hand.json.JSONArray;
+import com.hand.json.JSONException;
+import com.hand.json.JSONObject;
 import com.hand.util.FileUtil;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.*;
-import java.nio.charset.Charset;
+import java.io.IOException;
 
 /**
  * json转xml工具类
@@ -80,11 +80,31 @@ public class ConvertJsonAndXmlUtil {
     public static String convert(String json, String rootNode
             , String elementNode, String namespace, String encoding) throws JSONException
     {
-        org.json.JSONObject jsonFileObject = new org.json.JSONObject(json);
-        String xml = "<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>\n<"+ elementNode
-                + ":" +rootNode + " " + namespace + ">"
-                + org.json.XML.toString(jsonFileObject, elementNode)
-                + "</" + elementNode + ":" +rootNode+">";
-        return xml;
+            Object object = com.alibaba.fastjson.JSONObject.parse(json);
+            Object obj = null;
+            if(object instanceof com.alibaba.fastjson.JSONArray){
+                JSONArray jsonArray = new JSONArray(json);
+                obj = jsonArray;
+            }else if(object instanceof com.alibaba.fastjson.JSONObject){
+                JSONObject jsonObject = new JSONObject(json);
+                obj = jsonObject;
+            }else{
+                System.out.println("Not JsonArray And JsonObject");
+            }
+            String xml = "<?xml version=\"1.0\" encoding=\"" + encoding + "\"?>\n<"+ elementNode
+                    + ":" +rootNode + " " + namespace + ">"
+                    + com.hand.json.XML.toString(obj, elementNode)
+                    + "</" + elementNode + ":" +rootNode+">";
+            return xml;
+
+    }
+
+    public static boolean isJson(String string){
+        try{
+            com.alibaba.fastjson.JSONObject jsonObject = com.alibaba.fastjson.JSONObject.parseObject(string);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 }
